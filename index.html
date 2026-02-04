@@ -138,8 +138,6 @@
             align-items: center; 
             gap: 10px;
         }
-        /* Add a "hash" # before headers like in markdown/code */
-        h2::before { content: "#"; color: var(--accent); opacity: 0.6; }
 
         p { color: var(--text-muted); font-size: 1.1rem; line-height: 1.8; max-width: 800px; margin-bottom: 20px; }
 
@@ -214,10 +212,10 @@
             body { flex-direction: column; }
             nav { width: 100%; height: auto; position: relative; padding: 20px; border-right: none; border-bottom: 1px solid var(--border); flex-direction: row; justify-content: space-between; align-items: center; }
             nav .profile-img { width: 50px; height: 50px; margin: 0; border-width: 2px; }
-            nav .nav-links { display: none; } /* Hide links on very small mobile for cleanliness, or toggle them */
+            nav .nav-links { display: none; } /* Hide links on very small mobile for cleanliness */
             main { margin-left: 0; padding: 40px 20px; }
             h1 { font-size: 2.2rem; }
-            .theme-toggle { top: 80px; right: 20px; } /* Move toggle down so it doesn't overlap header */
+            .theme-toggle { top: 80px; right: 20px; } 
         }
     </style>
 </head>
@@ -234,12 +232,12 @@
         <img src="Profile.jpg" alt="Intisar" class="profile-img">
         
         <ul class="nav-links">
-            <li><a href="#about" class="active">01. // About</a></li>
-            <li><a href="#education">02. // Education</a></li>
-            <li><a href="#skills">03. // Skills</a></li>
-            <li><a href="#projects">04. // Projects</a></li>
-            <li><a href="#achievements">05. // Achievements</a></li>
-            <li><a href="#contact">06. // Contact</a></li>
+            <li><a href="#about" class="active">About</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#achievements">Achievements</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
 
         <div class="social-icons">
@@ -254,7 +252,7 @@
         <section id="about" data-aos="fade-up">
             <p style="font-family: var(--font-code); color: var(--accent); margin-bottom: 10px;">Hi, my name is</p>
             <h1>Intisar <br><span style="color: var(--text-muted);">Rahman Khan.</span></h1>
-            <h2 style="font-size: 1.5rem; margin-top: 10px; opacity: 0.7; border: none; padding: 0;">:: .NET Developer & Competitive Programmer</h2>
+            <h2 style="font-size: 1.5rem; margin-top: 10px; opacity: 0.7; border: none; padding: 0; display: block;">:: .NET Developer & Competitive Programmer</h2>
             
             <p style="margin-top: 30px;">
                 I am a dedicated Bachelor student at the <strong>University of Asia Pacific</strong> with a passion for building robust software architectures. 
