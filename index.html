@@ -7,132 +7,153 @@
     
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
         /* --- THEME VARIABLES --- */
         :root {
-            --bg-color: #0f172a;       
-            --card-bg: #1e293b;        
-            --text-main: #e2e8f0;      
+            /* Dark Theme */
+            --bg-body: #0f172a;       
+            --bg-sidebar: #1e293b;        
+            --text-main: #f1f5f9;      
             --text-muted: #94a3b8;     
             --accent: #38bdf8;         
-            --header-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            --shadow: 0 4px 6px rgba(0,0,0,0.3);
+            --border: rgba(255,255,255,0.1);
         }
 
         [data-theme="light"] {
-            --bg-color: #f0f4f8;       
-            --card-bg: #ffffff;        
-            --text-main: #1e293b;      
+            /* Light Theme */
+            --bg-body: #ffffff;       
+            --bg-sidebar: #f8fafc;        
+            --text-main: #334155;      
             --text-muted: #64748b;     
-            --accent: #2563eb;         
-            --header-gradient: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
-            --shadow: 0 4px 15px rgba(0,0,0,0.05);
+            --accent: #b94625; /* That 'Terracotta' color from your example image */
+            --border: rgba(0,0,0,0.1);
         }
+
+        * { box-sizing: border-box; }
 
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0; padding: 0;
-            line-height: 1.6;
             color: var(--text-main);
-            background-color: var(--bg-color);
-            transition: background-color 0.3s ease, color 0.3s ease;
-            overflow-x: hidden;
+            background-color: var(--bg-body);
+            transition: all 0.3s ease;
+            display: flex;
+            min-height: 100vh;
         }
 
-        /* --- HEADER --- */
-        header {
-            position: relative;
+        /* --- SIDEBAR (The Left Panel) --- */
+        nav {
+            width: 280px;
+            background-color: var(--bg-sidebar);
             height: 100vh;
+            position: fixed;
+            top: 0; left: 0;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            text-align: center;
-            background: var(--header-gradient);
-            color: white;
-            border-radius: 0 0 0 0;
-            margin-bottom: 60px;
+            padding: 40px 20px;
+            border-right: 1px solid var(--border);
+            z-index: 100;
+            overflow-y: auto;
         }
-        
-        .profile-img-header {
-            width: 180px; height: 180px;
+
+        .profile-img {
+            width: 150px; height: 150px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid rgba(255,255,255,0.2);
+            border: 4px solid var(--accent);
             margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        header h1 { font-size: 3.5rem; margin: 10px 0; letter-spacing: -1px; text-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-        header h3 { font-weight: 300; font-size: 1.5rem; opacity: 0.9; color: var(--accent) !important; }
-        header p { color: rgba(255,255,255,0.7) !important; margin-top: 5px; }
-
-        .btn {
-            display: inline-block; margin-top: 30px; padding: 12px 35px;
-            background: transparent; color: white; font-weight: 600; text-decoration: none;
-            border: 2px solid var(--accent); border-radius: 30px;
-            transition: all 0.3s ease;
-        }
-        .btn:hover { background: var(--accent); box-shadow: 0 0 20px rgba(56, 189, 248, 0.4); }
-
-        /* Theme Toggle */
-        .theme-toggle {
-            position: absolute; top: 30px; right: 30px;
-            background: rgba(255,255,255,0.1); border: none;
-            color: white; padding: 10px; border-radius: 50%;
-            cursor: pointer; z-index: 100; font-size: 1.2rem;
             transition: transform 0.3s;
         }
-        .theme-toggle:hover { transform: rotate(15deg) scale(1.1); background: rgba(255,255,255,0.2); }
+        .profile-img:hover { transform: scale(1.05); }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
-        h2 { font-size: 2rem; margin-bottom: 30px; color: var(--text-main); border-left: 5px solid var(--accent); padding-left: 15px; }
-
-        /* --- CARDS & GRID --- */
-        .card, .project-card, .award-card {
-            background: var(--card-bg); padding: 25px; margin-bottom: 20px;
-            border-radius: 12px; border: 1px solid rgba(148, 163, 184, 0.1);
-            box-shadow: var(--shadow); transition: transform 0.3s;
+        .nav-links {
+            list-style: none; padding: 0; width: 100%; text-align: center;
         }
-        .card:hover, .project-card:hover, .award-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .nav-links li { margin-bottom: 15px; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+            font-family: 'Oswald', sans-serif; /* Formal Heading Font */
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+        .social-icons { margin-top: auto; display: flex; gap: 15px; }
+        .social-icons a { color: var(--text-muted); font-size: 1.2rem; transition: color 0.3s; }
+        .social-icons a:hover { color: var(--accent); }
+
+        /* --- MAIN CONTENT (The Right Panel) --- */
+        main {
+            flex: 1;
+            margin-left: 280px; /* Same as sidebar width */
+            padding: 60px 80px;
+            max-width: 1200px;
+        }
+
+        /* Typography */
+        h1 { font-family: 'Oswald', sans-serif; font-size: 3.5rem; text-transform: uppercase; margin: 0; line-height: 1.1; }
+        h1 span { color: var(--accent); }
+        h2 { font-family: 'Oswald', sans-serif; font-size: 2rem; color: var(--accent); margin-top: 60px; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px; }
+        p { color: var(--text-muted); font-size: 1.05rem; max-width: 800px; margin-bottom: 20px; }
+
+        /* Theme Toggle (Top Right) */
+        .theme-toggle {
+            position: fixed; top: 30px; right: 40px;
+            background: var(--bg-sidebar); border: 1px solid var(--border);
+            color: var(--text-main); padding: 10px; border-radius: 50%;
+            cursor: pointer; z-index: 200; transition: all 0.3s;
+        }
+        .theme-toggle:hover { color: var(--accent); transform: rotate(15deg); }
+
+        /* --- COMPONENTS --- */
         
-        .award-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        /* Items (Education/Projects) */
+        .item { margin-bottom: 40px; border-left: 3px solid var(--border); padding-left: 20px; transition: border-color 0.3s; }
+        .item:hover { border-left-color: var(--accent); }
+        .item h3 { margin: 0 0 5px 0; font-size: 1.4rem; }
+        .item .meta { font-size: 0.9rem; color: var(--accent); font-weight: 500; margin-bottom: 10px; display: block; }
 
-        .award-card h3 { color: #fbbf24; display: flex; align-items: center; gap: 10px; }
-        .award-img-thumb {
-            margin-top: 15px; width: 100%; height: 160px; object-fit: cover;
-            border-radius: 6px; cursor: pointer; filter: grayscale(40%);
-            transition: all 0.3s;
+        /* Skills Grid */
+        .skills-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+        .skill-tag {
+            background: var(--bg-sidebar); border: 1px solid var(--border);
+            color: var(--text-main); padding: 8px 16px; font-size: 0.9rem;
+            border-radius: 4px; font-weight: 500;
         }
-        .award-img-thumb:hover { filter: grayscale(0%); transform: scale(1.02); }
+
+        /* Image Gallery for Awards */
+        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .gallery img {
+            width: 100%; height: 200px; object-fit: cover;
+            border-radius: 8px; cursor: pointer; opacity: 0.8; transition: all 0.3s;
+            border: 1px solid var(--border);
+        }
+        .gallery img:hover { opacity: 1; transform: translateY(-5px); border-color: var(--accent); }
 
         /* Lightbox */
         #lightbox {
-            display: none; position: fixed; z-index: 10000;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95);
-            justify-content: center; align-items: center;
-            opacity: 0; transition: opacity 0.3s;
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center;
         }
-        #lightbox.active { opacity: 1; }
-        #lightbox img { max-width: 90%; max-height: 90%; border-radius: 4px; box-shadow: 0 0 30px rgba(0,0,0,0.5); }
+        #lightbox img { max-width: 90%; max-height: 90%; border-radius: 5px; }
         #lightbox-close { position: absolute; top: 30px; right: 40px; color: white; font-size: 3rem; cursor: pointer; }
 
-        /* Skill Tags */
-        .skill-tag {
-            display: inline-block; background: transparent; color: var(--accent);
-            border: 1px solid var(--accent); padding: 8px 16px;
-            border-radius: 4px; margin: 6px; font-weight: 500; font-size: 0.9rem;
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            nav { width: 100%; height: auto; position: relative; padding: 20px; border-right: none; border-bottom: 1px solid var(--border); }
+            main { margin-left: 0; padding: 40px 20px; }
+            .nav-links { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; font-size: 0.8rem; }
+            h1 { font-size: 2.5rem; }
+            .theme-toggle { top: 20px; right: 20px; }
         }
-        .skill-tag:hover { background: var(--accent); color: white; }
-        
-        .social-icons a { color: white; font-size: 1.5rem; margin: 0 15px; opacity: 0.7; transition: opacity 0.3s; }
-        .social-icons a:hover { opacity: 1; }
-
-        footer { text-align: center; padding: 60px 0; color: var(--text-muted); font-size: 0.9rem; margin-top: 60px; }
     </style>
 </head>
 <body>
@@ -142,130 +163,137 @@
         <img id="lightbox-img" src="" alt="Full Screen Image">
     </div>
 
-    <header data-aos="fade-in">
-        <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-sun" id="theme-icon"></i></button>
+    <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-sun" id="theme-icon"></i></button>
 
-        <img src="Profile.jpg" alt="Intisar" class="profile-img-header">
-
-        <h1>Intisar Rahman Khan</h1>
-        <h3><span id="typed-text"></span></h3>
-        <p>University of Asia Pacific</p>
+    <nav>
+        <img src="Profile.jpg" alt="Intisar" class="profile-img">
         
-        <div class="social-icons" style="margin-top: 20px;">
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#achievements">Achievements</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <div class="social-icons">
             <a href="https://github.com/IntisarKhan2"><i class="fab fa-github"></i></a>
             <a href="https://www.linkedin.com/in/intisar-rahman-khan-909044372/"><i class="fab fa-linkedin"></i></a>
             <a href="#"><i class="fas fa-camera"></i></a>
         </div>
+    </nav>
+
+    <main>
         
-        <a href="mailto:rahman.intisarkhan@gmail.com" class="btn">Get In Touch</a>
-    </header>
+        <section id="about" data-aos="fade-up">
+            <h1>Intisar <br><span>Rahman Khan</span></h1>
+            <p style="margin-top: 20px; font-size: 1.2rem; color: var(--text-main);">
+                Computer Science Student • .NET Developer • Competitive Programmer
+            </p>
+            <p>
+                I am a dedicated Bachelor student at the <strong>University of Asia Pacific</strong> with a passion for building robust software architectures. 
+                My focus lies in the <strong>.NET ecosystem (C#)</strong> and database management with <strong>MS SQL Server</strong>. 
+                Beyond code, I am an active problem solver and a photography enthusiast.
+            </p>
+        </section>
 
-    <div class="container">
-
-        <section id="achievements">
-            <h2 data-aos="fade-right">Achievements</h2>
+        <section id="education">
+            <h2 data-aos="fade-right">Education</h2>
             
-            <div class="award-grid">
-                <div class="card award-card" data-aos="fade-up">
-                    <div>
-                        <h3><i class="fas fa-medal"></i> VC Award</h3>
-                        <p style="color:var(--text-main); font-weight:600;">Vice Chancellor's Merit Award</p>
-                        <p style="opacity: 0.8; font-size: 0.9rem;">University of Asia Pacific</p>
-                    </div>
-                    <img src="https://via.placeholder.com/400x250?text=VC+Award+Photo" 
-                         class="award-img-thumb" onclick="openLightbox(this.src)">
-                </div>
+            <div class="item" data-aos="fade-up">
+                <h3>University of Asia Pacific</h3>
+                <span class="meta">Bachelor of Science in CSE | Current</span>
+                <p>Focusing on Algorithms, Data Structures, and Software Engineering.</p>
+            </div>
 
-                <div class="card award-card" data-aos="fade-up" data-aos-delay="100">
-                    <div>
-                        <h3><i class="fas fa-trophy"></i> Dean's Award</h3>
-                        <p style="color:var(--text-main); font-weight:600;">Dean's List Honor</p>
-                        <p style="opacity: 0.8; font-size: 0.9rem;">University of Asia Pacific</p>
-                    </div>
-                    <img src="https://via.placeholder.com/400x250?text=Dean+Award+Photo" 
-                         class="award-img-thumb" onclick="openLightbox(this.src)">
-                </div>
+            <div class="item" data-aos="fade-up" data-aos-delay="100">
+                <h3>Ideal College</h3>
+                <span class="meta">Higher Secondary Certificate</span>
+            </div>
+
+            <div class="item" data-aos="fade-up" data-aos-delay="200">
+                <h3>Shamsul Haque Khan School & College</h3>
+                <span class="meta">Secondary School Certificate</span>
             </div>
         </section>
 
-        <section id="skills" style="margin-top: 60px;">
-            <h2 data-aos="fade-right">Technical Arsenal</h2>
-            <div data-aos="fade-up">
-                <span class="skill-tag">C# / .NET</span>
+        <section id="skills">
+            <h2 data-aos="fade-right">Skills</h2>
+            <div class="skills-grid" data-aos="fade-up">
+                <span class="skill-tag">C# / .NET Core</span>
                 <span class="skill-tag">MS SQL Server</span>
                 <span class="skill-tag">C++</span>
                 <span class="skill-tag">Java</span>
                 <span class="skill-tag">Python</span>
-                <span class="skill-tag">HTML5 & CSS</span>
-                <span class="skill-tag">Flutter (Basic)</span>
-                <span class="skill-tag">Algorithms</span>
-                <span class="skill-tag">Problem Solving</span>
-                <span class="skill-tag">Photography</span>
+                <span class="skill-tag">Data Structures</span>
+                <span class="skill-tag">HTML5 & CSS3</span>
+                <span class="skill-tag">Flutter (Basics)</span>
+                <span class="skill-tag">Adobe Lightroom</span>
             </div>
         </section>
 
-        <section id="projects" style="margin-top: 60px;">
-            <h2 data-aos="fade-right">Selected Works</h2>
-            <div class="grid">
-                <div class="project-card" data-aos="fade-up">
-                    <h3 style="color: var(--accent)"><i class="fas fa-code"></i>&nbsp; CP Profile</h3>
-                    <p style="margin-top:10px;">Solving complex algorithmic challenges on Codeforces.</p>
-                    <a href="https://codeforces.com/profile/Intisar_Khan" style="color:var(--text-main); font-size:0.9rem; text-decoration: underline;">View Profile</a>
-                </div>
+        <section id="projects">
+            <h2 data-aos="fade-right">Projects</h2>
+            
+            <div class="item" data-aos="fade-up">
+                <h3>Carpool Management System</h3>
+                <span class="meta">C# • MS SQL Server</span>
+                <p>Designed a comprehensive database schema and backend logic to manage vehicle bookings, route optimization, and user management. This project highlights my strong grasp of relational databases.</p>
+            </div>
 
-                <div class="project-card" data-aos="fade-up" data-aos-delay="100">
-                    <h3 style="color: var(--accent)"><i class="fas fa-database"></i>&nbsp; Carpool DB</h3>
-                    <p style="margin-top:10px;">Carpool Management System architecture using <strong>MS SQL Server</strong>.</p>
-                    <span style="font-size:0.8rem; opacity: 0.7;">(Local Project)</span>
-                </div>
+            <div class="item" data-aos="fade-up" data-aos-delay="100">
+                <h3>Competitive Programming</h3>
+                <span class="meta">C++ • Algorithms</span>
+                <p>Active solver on Codeforces. I regularly participate in contests to sharpen my problem-solving skills and understanding of complex algorithms.</p>
+                <a href="https://codeforces.com/profile/Intisar_Khan" style="color: var(--accent); text-decoration: none; font-weight: bold;">View Codeforces Profile &rarr;</a>
+            </div>
+
+            <div class="item" data-aos="fade-up" data-aos-delay="200">
+                <h3>Photography Portfolio</h3>
+                <span class="meta">Creative</span>
+                <p>Capturing urban life and nature. My photography balances my technical life with creative expression.</p>
+            </div>
+        </section>
+
+        <section id="achievements">
+            <h2 data-aos="fade-right">Achievements</h2>
+            <div class="gallery">
+                <img src="https://via.placeholder.com/400x300?text=VC+Award+Certificate" 
+                     onclick="openLightbox(this.src)" data-aos="zoom-in">
                 
-                <div class="project-card" data-aos="fade-up" data-aos-delay="200">
-                    <h3 style="color: var(--accent)"><i class="fas fa-camera"></i>&nbsp; Photography</h3>
-                    <p style="margin-top:10px;">Capturing perspectives through the lens.</p>
-                    <a href="#" style="color:var(--text-main); font-size:0.9rem; text-decoration: underline;">View Gallery</a>
-                </div>
+                <img src="https://via.placeholder.com/400x300?text=Dean+Award+Certificate" 
+                     onclick="openLightbox(this.src)" data-aos="zoom-in" data-aos-delay="100">
             </div>
         </section>
 
-        <section id="education" style="margin-top: 60px;">
-            <h2 data-aos="fade-right">Education</h2>
-            <div class="card" data-aos="fade-up" style="border-left: 5px solid var(--accent);">
-                <h3>University of Asia Pacific</h3>
-                <p>Bachelor's Degree | Current</p>
-            </div>
-            <div class="card" data-aos="fade-up" data-aos-delay="100">
-                <h3>Ideal College</h3>
-                <p>HSC</p>
-            </div>
+        <section id="contact" style="margin-bottom: 50px;">
+            <h2 data-aos="fade-right">Contact</h2>
+            <p>I am currently open to internship opportunities and collaborations.</p>
+            <a href="mailto:rahman.intisarkhan@gmail.com" 
+               style="display: inline-block; background: var(--accent); color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+               Email Me
+            </a>
         </section>
 
-    </div>
+        <footer>
+            <p style="font-size: 0.8rem; opacity: 0.5;">&copy; 2024 Intisar Rahman Khan</p>
+        </footer>
 
-    <footer>
-        <p>&copy; 2024 Intisar Rahman Khan. Built with C# Passion.</p>
-    </footer>
+    </main>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
     <script>
         AOS.init({ duration: 800, once: true });
-
-        var typed = new Typed('#typed-text', {
-            strings: ['.NET Developer', 'Competitive Programmer', 'Photographer'],
-            typeSpeed: 50, backSpeed: 30, loop: true, showCursor: false
-        });
 
         // Lightbox Logic
         function openLightbox(src) {
             const lightbox = document.getElementById('lightbox');
             document.getElementById('lightbox-img').src = src;
             lightbox.style.display = 'flex';
-            setTimeout(() => lightbox.classList.add('active'), 10);
         }
         function closeLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            lightbox.classList.remove('active');
-            setTimeout(() => lightbox.style.display = 'none', 300);
+            document.getElementById('lightbox').style.display = 'none';
         }
 
         // Theme Toggle Logic
@@ -285,6 +313,5 @@
             }
         }
     </script>
-
 </body>
 </html>
