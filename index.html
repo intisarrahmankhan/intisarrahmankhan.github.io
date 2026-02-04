@@ -11,7 +11,7 @@
     <meta name="keywords" content="Intisar Rahman Khan, .NET Developer, C# Developer, Portfolio, Software Engineer, University of Asia Pacific, Dhaka">
     <meta name="author" content="Intisar Rahman Khan">
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23b94625' rx='20'/><text x='50' y='70' font-family='sans-serif' font-size='70' font-weight='bold' fill='white' text-anchor='middle'>I</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23b94625' rx='20'/><text x='50' y='68' font-family='monospace' font-size='55' font-weight='900' fill='white' text-anchor='middle' letter-spacing='-3'>IK</text></svg>">
     
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -34,7 +34,7 @@
         }
 
         [data-theme="light"] {
-            /* Light Mode (Now the Default) */
+            /* Light Mode (Default) */
             --bg-body: #ffffff;       
             --bg-sidebar: #f8fafc;        
             --text-main: #24292f;      
@@ -62,7 +62,7 @@
             min-height: 100vh;
         }
 
-        /* --- SIDEBAR --- */
+        /* --- SIDEBAR (Static, No Scrollbar) --- */
         nav {
             width: 300px;
             background-color: var(--bg-sidebar);
@@ -286,7 +286,7 @@
                 <span class="skill-tag">Data Structures</span>
                 <span class="skill-tag">HTML5 & CSS3</span>
                 <span class="skill-tag">Flutter (Basics)</span>
-                <span class="skill-tag">Photography</span>
+                <span class="skill-tag">Adobe Lightroom</span>
             </div>
         </section>
 
@@ -378,7 +378,7 @@
             });
         });
 
-        // Theme Toggle (Adjusted for default Light mode)
+        // Theme Toggle (Starts in Light, toggles to Dark)
         function toggleTheme() {
             const html = document.documentElement;
             const icon = document.getElementById('theme-icon');
