@@ -18,232 +18,7 @@
     
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@300;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     
-    <style>
-        /* --- THEME VARIABLES --- */
-        :root {
-            /* Charcoal & Gold Theme (Premium Dark) */
-            --bg-body: #212529;        
-            --bg-sidebar: #2b3035;     
-            --text-main: #e9ecef;      
-            --text-muted: #adb5bd;     
-            --accent: #f59e0b;         
-            --border: rgba(255, 255, 255, 0.08);
-            --card-hover: rgba(245, 158, 11, 0.08);
-            
-            /* NEW FONTS APPLIED HERE */
-            --font-head: 'Space Grotesk', sans-serif; /* Unique, Techy Headings */
-            --font-body: 'DM Sans', sans-serif;       /* Clean, Geometric Body */
-            --font-code: 'JetBrains Mono', monospace; /* Developer Accents */
-            
-            --bg-pattern: linear-gradient(#2b3035 1px, transparent 1px), linear-gradient(90deg, #2b3035 1px, transparent 1px);
-        }
-
-        [data-theme="light"] {
-            /* Light Mode (Default) */
-            --bg-body: #ffffff;       
-            --bg-sidebar: #f8fafc;        
-            --text-main: #24292f;      
-            --text-muted: #57606a;     
-            --accent: #b94625; /* Terracotta */        
-            --border: rgba(27, 31, 35, 0.15);
-            --card-hover: rgba(185, 70, 37, 0.05);
-            
-            /* Keep same fonts in light mode for consistency */
-            --font-head: 'Space Grotesk', sans-serif;
-            --font-body: 'DM Sans', sans-serif;
-            --font-code: 'JetBrains Mono', monospace;
-            
-            --bg-pattern: none;
-        }
-
-        * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: var(--font-body); /* Changed to DM Sans */
-            margin: 0; padding: 0;
-            color: var(--text-main);
-            background-color: var(--bg-body);
-            background-image: var(--bg-pattern);
-            background-size: 25px 25px; 
-            transition: all 0.3s ease;
-            display: flex;
-            min-height: 100vh;
-        }
-
-        /* --- SIDEBAR --- */
-        nav {
-            width: 300px;
-            background-color: var(--bg-sidebar);
-            height: 100vh;
-            position: fixed;
-            top: 0; left: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 30px; 
-            border-right: 1px solid var(--border);
-            z-index: 100;
-            overflow: hidden; 
-        }
-
-        .profile-img {
-            width: 200px;  
-            height: 200px; 
-            border-radius: 16px; 
-            object-fit: cover;
-            border: 2px solid var(--border);
-            margin-bottom: 30px;
-            transition: transform 0.3s, border-color 0.3s;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        }
-        .profile-img:hover { transform: scale(1.02); border-color: var(--accent); }
-
-        .nav-links { list-style: none; padding: 0; width: 100%; text-align: left; }
-        .nav-links li { margin-bottom: 5px; }
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-muted);
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: all 0.2s;
-            font-family: var(--font-head); /* Headings Font for Menu */
-            letter-spacing: 0.5px;
-            display: block;
-            padding: 12px 15px;
-            border-radius: 6px;
-        }
-        .nav-links a:hover, .nav-links a.active { 
-            color: var(--accent); 
-            background: rgba(255,255,255,0.03);
-            font-weight: 700;
-            border-left: 3px solid var(--accent);
-        }
-
-        .social-icons { margin-top: auto; display: flex; gap: 20px; }
-        .social-icons a { color: var(--text-muted); font-size: 1.4rem; transition: color 0.3s; }
-        .social-icons a:hover { color: var(--accent); transform: translateY(-3px); }
-
-        /* --- MAIN CONTENT --- */
-        main {
-            flex: 1;
-            margin-left: 300px;
-            padding: 80px 100px;
-            max-width: 1400px;
-        }
-
-        h1 { 
-            font-family: var(--font-head); /* Space Grotesk */
-            font-size: 3.8rem; /* Slightly larger for impact */
-            font-weight: 700; 
-            margin: 0; 
-            letter-spacing: -2px; /* Tight spacing for modern look */
-            line-height: 1.1;
-        }
-        h1 span { color: var(--accent); }
-        
-        h2 { 
-            font-family: var(--font-head); /* Space Grotesk */
-            font-size: 2rem; 
-            color: var(--text-main); 
-            margin-top: 80px; margin-bottom: 30px; 
-            border-bottom: 2px solid var(--border); padding-bottom: 10px; display: inline-block;
-            letter-spacing: -0.5px;
-        }
-
-        p { color: var(--text-muted); font-size: 1.15rem; line-height: 1.8; max-width: 800px; margin-bottom: 20px; }
-
-        .theme-toggle {
-            position: fixed; top: 30px; right: 40px;
-            background: var(--bg-sidebar); border: 1px solid var(--border);
-            color: var(--text-main); padding: 12px; border-radius: 8px;
-            cursor: pointer; z-index: 200; transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        .theme-toggle:hover { color: var(--accent); transform: translateY(-2px); }
-
-        /* --- CARDS & ITEMS --- */
-        .item { 
-            margin-bottom: 30px; padding: 25px; 
-            border: 1px solid var(--border); border-radius: 8px; 
-            background: rgba(255,255,255,0.01); transition: all 0.3s; 
-        }
-        .item:hover { 
-            border-color: var(--accent); background: var(--card-hover); 
-            transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        .item h3 { 
-            margin: 0 0 8px 0; 
-            font-size: 1.4rem; 
-            font-family: var(--font-head);
-            font-weight: 600; 
-        }
-        .item .meta { 
-            font-family: var(--font-code); font-size: 0.85rem; color: var(--accent); 
-            margin-bottom: 12px; display: block; opacity: 0.9;
-        }
-
-        .skills-grid { display: flex; flex-wrap: wrap; gap: 12px; }
-        .skill-tag {
-            font-family: var(--font-code); background: transparent; 
-            border: 1px solid var(--border); color: var(--text-muted); 
-            padding: 8px 16px; font-size: 0.85rem; border-radius: 6px; transition: all 0.2s;
-        }
-        .skill-tag:hover { color: var(--accent); border-color: var(--accent); background: var(--card-hover); }
-
-        /* --- LIST VIEW FOR ACHIEVEMENTS --- */
-        .achievement-list { display: flex; flex-direction: column; gap: 15px; }
-        
-        .achievement-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px 25px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            background: rgba(255,255,255,0.01);
-            transition: all 0.3s;
-        }
-        .achievement-item:hover {
-            border-color: var(--accent);
-            background: var(--card-hover);
-            transform: translateX(5px);
-        }
-        
-        .ach-info h3 { margin: 0 0 5px 0; font-size: 1.2rem; color: var(--text-main); font-family: var(--font-head); }
-        .ach-info p { margin: 0; font-size: 0.95rem; color: var(--text-muted); }
-        
-        .ach-link {
-            text-decoration: none;
-            color: var(--accent);
-            font-family: var(--font-code);
-            font-size: 0.85rem;
-            font-weight: 600;
-            border: 1px solid var(--accent);
-            padding: 8px 16px;
-            border-radius: 4px;
-            transition: all 0.2s;
-            white-space: nowrap; 
-        }
-        .ach-link:hover {
-            background: var(--accent);
-            color: var(--bg-body);
-        }
-
-        /* Mobile */
-        @media (max-width: 900px) {
-            body { flex-direction: column; }
-            nav { width: 100%; height: auto; position: relative; padding: 20px; border-right: none; border-bottom: 1px solid var(--border); flex-direction: row; justify-content: space-between; align-items: center; overflow: visible; }
-            nav .profile-img { width: 50px; height: 50px; margin: 0; border-width: 2px; }
-            nav .nav-links { display: none; }
-            main { margin-left: 0; padding: 40px 20px; }
-            h1 { font-size: 2.2rem; }
-            .theme-toggle { top: 80px; right: 20px; } 
-            
-            .achievement-item { flex-direction: column; align-items: flex-start; gap: 15px; }
-            .ach-link { width: 100%; text-align: center; }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -308,7 +83,7 @@
                 <span class="skill-tag">Data Structures</span>
                 <span class="skill-tag">HTML5 & CSS3</span>
                 <span class="skill-tag">Flutter (Basics)</span>
-                <span class="skill-tag">Photography</span>
+                <span class="skill-tag">Adobe Lightroom</span>
             </div>
         </section>
 
@@ -317,7 +92,7 @@
             
             <div class="item" data-aos="fade-up">
                 <h3>Carpool Management System</h3>
-                <span class="meta">MS SQL Server • Database Architecture</span>
+                <span class="meta">C# • MS SQL Server • Database Architecture</span>
                 <p>Designed a comprehensive database schema and backend logic to manage vehicle bookings, route optimization, and user management. This project highlights my strong grasp of relational databases.</p>
             </div>
 
@@ -376,47 +151,8 @@
     </main>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({ duration: 800, once: true });
+    
+    <script src="script.js"></script>
 
-        // Scrollspy
-        window.addEventListener('scroll', () => {
-            let current = "";
-            const sections = document.querySelectorAll("section");
-            
-            sections.forEach((section) => {
-                const sectionTop = section.offsetTop;
-                if (window.scrollY >= (sectionTop - 250)) {
-                    current = section.getAttribute("id");
-                }
-            });
-
-            if (window.scrollY < 100) current = "about";
-
-            document.querySelectorAll(".nav-links a").forEach((li) => {
-                li.classList.remove("active");
-                if (li.getAttribute("href").includes(current)) {
-                    li.classList.add("active");
-                }
-            });
-        });
-
-        // Theme Toggle
-        function toggleTheme() {
-            const html = document.documentElement;
-            const icon = document.getElementById('theme-icon');
-            const currentTheme = html.getAttribute('data-theme');
-            
-            if (currentTheme === 'light') {
-                html.setAttribute('data-theme', 'dark');
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-            } else {
-                html.setAttribute('data-theme', 'light');
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
-            }
-        }
-    </script>
 </body>
 </html>
